@@ -1,0 +1,104 @@
+//
+
+$print-page-format = A4
+$paper-height = 11.6929133858in // 297mm (11.6929133858in) -> A4 // 11in (279.4mm) -> US
+//$paper-width = 8.2677165354in // 210mm (8.2677165354in) -> A4 // 8.5in (215.9mm) -> US
+
+$inch = 1in
+$dpi = 72
+
+$paper-top-padding = $inch
+$paper-right-padding = $inch
+$paper-bottom-padding = $inch
+$paper-left-padding = 1.5 * $inch
+
+$cover-padding = 1.5 * $inch
+
+$text-on-page-height = $paper-height - $paper-top-padding - $paper-bottom-padding
+$text-on-page-width = 6 * $inch
+
+$symbols-per-line = 60 // 10 symbols (monotype) per inch
+$symbol-width = $text-on-page-width / $symbols-per-line //$inch / 10 // .1in //
+$font-size = ($inch / $dpi) * 11.5 // 12 // 12pt .16in //
+
+$lines-count = 55 // 55 in standart
+$line-height = $text-on-page-height / $lines-count
+
+@media screen
+
+  .screed
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    overflow auto
+
+  .screed-paper
+    margin $cover-padding auto
+    width $text-on-page-width + $paper-right-padding + $paper-left-padding // $paper-width
+    min-height $text-on-page-height
+    padding $paper-top-padding $paper-right-padding $paper-bottom-padding $paper-left-padding
+    position relative
+    background-color #ffffff  // move to themes
+
+    &.screed-focus // for example
+      box-shadow 0 0 20px -4px rgba(0, 200, 0, .5) inset, 0 0 20px -4px rgba(0, 200, 0, .5) // move to themes
+
+    // Paper shadow start  // move to themes
+    &:before
+    &:after
+      position   absolute
+      size       40% .1in
+      content    ' '
+      left       .05in
+      right      auto
+      bottom     .14in
+      background transparent
+      transform  skew(-5deg) rotate(-5deg)
+      box-shadow 0 .08in .13in rgba(0, 0, 0, 0.5)
+      z-index    -1
+    &:after
+      left       auto
+      right      .05in
+      transform  skew(5deg) rotate(5deg)
+    // Paper shadow end
+
+    .screed-doc
+      min-height $text-on-page-height
+      min-width  $text-on-page-width
+
+      // locked functional - for future
+      &:before
+        font-family 'FontAwesome'
+        font-size   $inch / 3
+        color       rgba(100, 100, 100, .1) !important
+        position    absolute
+        top         $inch / 2
+        right       $inch / 2
+      &.locked:before
+        content     '\f023' // locked
+
+@media print
+
+  @page
+    size          $print-page-format portrait
+    margin-top    $paper-top-padding
+    margin-right  0 //($paper-right-padding - $symbol-width * 4)
+    margin-bottom $paper-bottom-padding
+    margin-left   ($paper-left-padding - $symbol-width * 6)
+
+    counter-increment page
+
+    @top-right
+      content counter(page) '.'
+
+  .screed-paper
+    width            auto
+    page-break-after always
+
+    .screed-doc
+      min-height auto
+      height     auto
+      overflow   visible
+      max-width  $text-on-page-width

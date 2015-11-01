@@ -1,0 +1,11 @@
+index
+  // QuillJS method
+  .screed-cursors(as="$node")
+    each cursorsIds as #cursorId
+      if userId !== #cursorId
+        view(
+        is="d-screed-cursor"
+        as-array="$cursors"
+        data="{{data[#cursorId]}}"
+        positions="{{positions[#cursorId]}}"
+        )

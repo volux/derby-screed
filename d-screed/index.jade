@@ -1,0 +1,77 @@
+index(element="d-screed")
+
+  section(as="$node" class="screed{{if focus}} scr-focus{{/}}" id="{{id}}" data-id="{{data.id}}")
+
+    // Quill method
+    view(
+      is="d-screed-cursors"
+      as="$cursors"
+      data="{{cursors}}"
+      userId="{{userId}}"
+      )
+
+    view(
+      is="d-screed-{{scheme.role}}"
+      as="$doc"
+      data="{{data[scheme.role]}}"
+      scheme="{{scheme}}"
+      blank="{{blank[scheme.role]}}"
+      lookup="{{data.lookup}}"
+      markers="{{data.markers}}"
+      )
+
+    if @debug
+      textarea.screed-json(as="$json" class="{{if !focus}} hidden{{/}}") {{json}}
+
+    if @showPosition
+      .screed-position(as="$position" class="{{if !focus}} hidden{{/}}")
+        .cursor {{position.section}}:{{position.line}}:{{position.cursor}}
+        .path {{position.path}}
+
+children
+
+  if scheme.content.type === "root" || scheme.content.type === "form"
+    each scheme.content.items as #item, #i
+      if #item.role === "attr"
+        view(
+          is="d-screed-attr"
+          as-array="$attributes"
+          //as-object="$attributes, #item.name"
+          scheme="{{#item}}"
+          data="{{data[#item.name]}}"
+          )
+      else
+        view(
+          is="d-screed-{{#item.role}}"
+          as-array="$children"
+          scheme="{{#item}}"
+          blank="{{blank[#item.name]}}"
+          data="{{data[#item.name]}}"
+          i="{{#i}}"
+          )
+
+  else
+  if scheme.content.type === "list"
+    each data as #data, #i
+      view(
+        is="d-screed-{{scheme.content.items[0].role}}"
+        as-array="$children"
+        scheme="{{scheme.content.items[0]}}"
+        blank="{{blank[0]}}"
+        data="{{#data}}"
+        i="{{#i}}"
+        )
+
+  else
+  if scheme.content.type === "heap"
+    with scheme.content.items[0] as #item
+      each data as #element, #i
+        with #element[#item.name] as #data
+          view(
+            is="d-screed-{{#item.role}}"
+            as-array="$children"
+            scheme="{{scheme.content.items[0]}}"
+            blank="{{blank[0][#item.name]}}"
+            data="{{#data}}"
+            i="{{#i}}"
+            )
