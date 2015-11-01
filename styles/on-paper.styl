@@ -19,10 +19,12 @@ $text-on-page-width = 6 * $inch
 
 $symbols-per-line = 60 // 10 symbols (monotype) per inch
 $symbol-width = $text-on-page-width / $symbols-per-line //$inch / 10 // .1in //
-$font-size = ($inch / $dpi) * 11.5 // 12 // 12pt .16in //
+$screed-font-size = ($inch / $dpi) * 11.5 // 12 // 12pt .16in //
 
-$lines-count = 55 // 55 in standart
+$lines-count = 55 // 55 in standart (monotype)
 $line-height = $text-on-page-height / $lines-count
+
+$screed-paper-in-focus-box-shadow ?= 0 0 20px -4px rgba(0, 200, 0, .5) inset, 0 0 20px -4px rgba(0, 200, 0, .5)
 
 @media screen
 
@@ -40,12 +42,12 @@ $line-height = $text-on-page-height / $lines-count
     min-height $text-on-page-height
     padding $paper-top-padding $paper-right-padding $paper-bottom-padding $paper-left-padding
     position relative
-    background-color #ffffff  // move to themes
+    background-color #ffffff
 
-    &.screed-focus // for example
-      box-shadow 0 0 20px -4px rgba(0, 200, 0, .5) inset, 0 0 20px -4px rgba(0, 200, 0, .5) // move to themes
+    &.screed-focus
+      box-shadow $screed-paper-in-focus-box-shadow
 
-    // Paper shadow start  // move to themes
+    // Paper shadow start
     &:before
     &:after
       position   absolute
