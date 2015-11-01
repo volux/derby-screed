@@ -2,7 +2,7 @@ index
   // Template idea taken from QuillJS multi cursor module
   // https://github.com/quilljs/quill/blob/develop/src/modules/multi-cursor.js
 
-  //put your code in app.proto.cursorColorForUser
+  //put your code in app.proto.screedCursorColorForUser
   with screedCursorColorForUser(data.userId) as #bgColor
     each positions as #position, #i
       if #i === 0
@@ -11,7 +11,7 @@ index
         style="top:{{#position.top}}px; left:{{#position.left}}px; height:{{#position.height}}px;"
         )
           span.cursor-flag(as="$flag" style="background-color: {{#bgColor}};")
-            //put your code in app.proto.cursorLabelForUser
+            //put your code in app.proto.screedCursorLabelForUser
             span.cursor-name() {{screedCursorLabelForUser(data.userId)}}
           span.cursor-caret(style="background-color: {{#bgColor}}; width:{{#position.width}}px;") &#65279;
       else
