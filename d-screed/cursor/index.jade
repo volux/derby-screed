@@ -3,7 +3,7 @@ index
   // https://github.com/quilljs/quill/blob/develop/src/modules/multi-cursor.js
 
   //put your code in app.proto.cursorColorForUser
-  with cursorColorForUser(data.userId) as #bgColor
+  with screedCursorColorForUser(data.userId) as #bgColor
     each positions as #position, #i
       if #i === 0
         span.cursor(
@@ -12,7 +12,7 @@ index
         )
           span.cursor-flag(as="$flag" style="background-color: {{#bgColor}};")
             //put your code in app.proto.cursorLabelForUser
-            span.cursor-name() {{cursorLabelForUser(data.userId)}}
+            span.cursor-name() {{screedCursorLabelForUser(data.userId)}}
           span.cursor-caret(style="background-color: {{#bgColor}}; width:{{#position.width}}px;") &#65279;
       else
         span.cursor(
