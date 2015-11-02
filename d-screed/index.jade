@@ -2,7 +2,7 @@ index(element="d-screed")
 
   section(as="$node" class="screed{{if focus}} scr-focus{{/}}" id="{{id}}" data-id="{{data.id}}")
 
-    // Quill method
+    // QuillJS method
     view(
       is="d-screed-cursors"
       as="$cursors"
@@ -30,7 +30,7 @@ index(element="d-screed")
 
 children
 
-  if scheme.content.type === "root" || scheme.content.type === "form"
+  if scheme.content.type === "root" || scheme.content.type === "form"|| scheme.content.type === "table"
     each scheme.content.items as #item, #i
       if #item.role === "attr"
         view(

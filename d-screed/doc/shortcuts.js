@@ -1,5 +1,10 @@
 module.exports = {
 
+  // switch for boolean
+  'space': {
+    'action': require('./actions/switch')
+  },
+
   // delete symbol to left, glue with prev editable
   'backspace': {
     'action': require('./actions/backspace')
