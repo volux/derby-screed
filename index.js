@@ -1,4 +1,4 @@
-module.exports = function(app, options) {
+module.exports = function(app) {
 
   app.use(require('derby-keyboard-combokeys'));
   app.use(require('./lib/rangy-selection'));
@@ -17,5 +17,4 @@ module.exports = function(app, options) {
   app.component(require('./d-screed/cursors'));
   app.component(require('./d-screed/cursor'));
 
-  //if(!options || (options && options.loadStyles)) app.loadStyles(__dirname);
 };

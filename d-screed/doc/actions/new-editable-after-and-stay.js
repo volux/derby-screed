@@ -26,7 +26,7 @@ module.exports = function (event) {
       return false;
     }
 
-    var cursorPosition = (editables) ? editables[0]['start'] : context.selection.focusOffset;
+    var cursorPosition = (editables.length) ? editables[0]['start'] : context.selection.focusOffset;
 
     if (context.el.parent.isContentType('form')) {
 
@@ -38,7 +38,12 @@ module.exports = function (event) {
         nextBlock.insertBlankChild(0);
 
       } else {
-        // TODO ??? add next block after context.el.parent
+
+        if (!context.el.parent.isContentMerge(false)) {
+
+          context.el.moveCursorTo(cursorPosition);
+          context.el.parent.after(context.el.parent.getBlankData());
+        }
       }
 
       return false;

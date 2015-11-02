@@ -27,24 +27,25 @@ module.exports = function (event) {
 
         if (context.el.prevEditableFocus()) {
 
-          var text = context.el.getDataText();
+          if (context.el.parent.isContentIsListOrHeap()) {
 
-          if (context.el.parent.isContentIsListOrHeap() && !text.length) {
+            if (!context.el.getDataText().length) {
 
-            context.el.remove();
+              context.el.remove();
+            }
+
+          } else {
+
+            if (context.el.getIndex() === 0 && !context.el.parent.toString().length) {
+
+              context.el.parent.remove();
+            }
           }
         }
       }
       return false;
     }
-    if (context.el.isContentInput()) {
-
-      return context.selection.focusOffset !== 0;
-
-    } else {
-
-      context.el.moveCursorTo(context.selection.focusOffset-1);
-    }
+    return context.selection.focusOffset !== 0;
   }
   return false;
 };

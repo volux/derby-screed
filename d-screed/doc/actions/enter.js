@@ -29,9 +29,18 @@ module.exports = function (event) {
 
     var caret = (editables) ? editables[0]['start'] : context.selection.focusOffset;
 
-    if (context.el.parent.isContentType('form')) {
+    if (context.el.parent.isContentType(['form','table'])) {
 
-      context.el.prependBlankChildInNextBlock();
+      if (context.el.parent.isContentMerge(false)) {
+
+        context.el.prependBlankChildInNextBlock();
+
+      } else {
+
+        context.el.parent.after(context.el.parent.getBlankData())
+          .getFirstChild()
+            .focus();
+      }
       return false;
     }
     if (context.el.parent.isContentType('list')) {
