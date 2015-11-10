@@ -1,6 +1,6 @@
 index
 
-  div(class="screed-paper {{scheme.name}}{{if expand}} screed-expand{{/}}{{if focus}} screed-focus{{/}}")
+  div(class="screed-paper {{classes}} {{scheme.name}}{{if expand}} screed-expand{{/}}{{if focus}} screed-focus{{/}}")
 
     article(as="$node" id="{{id}}")
       view(is="d-screed:children")

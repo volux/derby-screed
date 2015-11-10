@@ -4,15 +4,12 @@ module.exports = function (event) {
 
   if (context && context.el) {
 
-    var section = this.getFirstChild();
+    var section = context.el.getSection().parent.getFirstChild();
 
     // TODO .isVisible() ???
     if (section) {
 
-      // TODO section.getFirstEditable()
-      section.getFirstChild()
-        .getFirstChild()
-          .focus();
+      section.getFirstEditable().focus()
       return false;
     }
   }

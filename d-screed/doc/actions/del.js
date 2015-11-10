@@ -6,16 +6,15 @@ module.exports = function (event) {
 
     if (!context.selection.isCollapsed) {
 
-      var editables = this.getEditablesInContext(context);
-      if (editables.length === 1) {
+      if (context.selected.length === 1) {
 
         return context.el.isContentInput();
       }
-      this.removeSelectedEditables(editables, false, function (firstEl) {
+      this.removeSelectedEditables(context.selected, false, function (firstEl) {
 
         if (!firstEl.glueWithNext()) {
 
-          firstEl.moveCursorTo(editables[0]['start']);
+          firstEl.moveCursorTo(context.selected[0].start);
         }
       });
 
@@ -29,10 +28,8 @@ module.exports = function (event) {
       context.el.glueWithNext();
       return false;
     }
-    if (context.el.isContentInput()) {
 
-      return context.selection.focusOffset !== text.length;
-    }
+    return context.selection.focusOffset !== text.length;
   }
   return false;
 };

@@ -8,10 +8,7 @@ module.exports = function (event) {
 
     if (nextSection) {
 
-      // TODO section.getFirstEditable()
-      nextSection.getFirstChild()
-        .getFirstChild()
-          .focus();
+      nextSection.getFirstEditable().focus();
 
       return false;
     }

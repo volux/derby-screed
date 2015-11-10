@@ -9,8 +9,7 @@ module.exports = function (event) {
       // TODO use selection
       if (!context.selection.isCollapsed) {
 
-        var editables = this.getEditablesInContext(context);
-        console.log(editables);
+        console.log(context.selected);
 
       } else {
 
@@ -27,6 +26,7 @@ module.exports = function (event) {
       return false;
     }
     section.after(section.getDataCopy(), function () {
+      // TODO universal parent level; maybe section === block
       section.getNextComponent()
         .getChild(0) // block
           .getChild(context.el.getIndex()) // editable

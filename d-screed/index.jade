@@ -1,6 +1,6 @@
 index(element="d-screed")
 
-  section(as="$node" class="screed{{if focus}} scr-focus{{/}}" id="{{id}}" data-id="{{data.id}}")
+  section(as="$node" class="screed{{if focus}} screed-focus{{/}}" id="{{id}}" data-id="{{data.id}}")
 
     // QuillJS method
     view(
@@ -8,6 +8,7 @@ index(element="d-screed")
       as="$cursors"
       data="{{cursors}}"
       userId="{{userId}}"
+      scroll="{{scroll}}"
       )
 
     view(
@@ -17,7 +18,8 @@ index(element="d-screed")
       scheme="{{scheme}}"
       blank="{{blank[scheme.role]}}"
       lookup="{{data.lookup}}"
-      markers="{{data.markers}}"
+      classes="{{docClasses}}"
+      //markers="{{data.markers}}"
       )
 
     if @debug

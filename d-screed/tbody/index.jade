@@ -1,0 +1,24 @@
+index
+
+  with getFields(data) as #fields
+
+    thead(contenteditable="false")
+      tr(class="table-head" contenteditable="false")
+        th(class="table-corner -head" contenteditable="false") &nbsp;
+
+        each #fields as #field, #i
+          with screedFieldLabel(#field) as #label
+            th(class="table-column-title table-column-{{#i}}" contenteditable="false") {{#label}}
+
+    // Maybe fixed table header
+    tfoot(contenteditable="false")
+      tr(class="table-foot" style="top: {{scroll}}px;" contenteditable="false")
+        th(class="table-corner -foot" contenteditable="false") &nbsp;
+
+        each #fields as #field, #i
+          with screedFieldLabel(#field) as #label
+            th(class="table-column-title table-column-{{#i}}" contenteditable="false") {{#label}}
+
+  tbody(as="$node" id="{{id}}")
+
+    view(is="d-screed:children")
