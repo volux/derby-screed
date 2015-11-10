@@ -6,10 +6,9 @@ module.exports = function (event) {
 
     if (!context.selection.isCollapsed) {
 
-      var editables = this.getEditablesInContext(context);
-      var lastEl = this.removeSelectedEditables(editables, true);
+      var lastEl = this.removeSelectedEditables(context.selected, true);
 
-      if (editables.length > 1) {
+      if (context.selected.length > 1) {
 
         lastEl.moveCursorTo(0);
         return false;
@@ -27,7 +26,7 @@ module.exports = function (event) {
       return false;
     }
 
-    var caret = (editables) ? editables[0]['start'] : context.selection.focusOffset;
+    var caret = (context.selected) ? context.selected[0]['start'] : context.selection.focusOffset;
 
     if (context.el.parent.isContentType(['form','table'])) {
 
@@ -37,9 +36,18 @@ module.exports = function (event) {
 
       } else {
 
-        context.el.parent.after(context.el.parent.getBlankData())
-          .getFirstChild()
+        if (caret === context.el.getDataText().length) {
+
+          context.el.parent.after(context.el.parent.getBlankData())
+            .getFirstChild()
             .focus();
+
+        } else {
+
+          context.el.newLineAfterCaret(caret, function () {
+            context.el.nextEditableFocus();
+          })
+        }
       }
       return false;
     }

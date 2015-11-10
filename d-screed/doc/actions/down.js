@@ -4,7 +4,7 @@ module.exports = function (event) {
 
   if (context && context.el) {
 
-    if (context.el.getRole() === 'inline') {
+    if (context.el.isInline) {
 
       var nextEditable = context.el.getNextBlockEditable();
 
@@ -20,6 +20,25 @@ module.exports = function (event) {
 
         nextEditable.moveCursorTo(context.el.getBeforeSymbolsCount() + context.selection.focusOffset);
       }
+
+      return false;
+    }
+    if (context.el.isCell) {
+
+      var nextRow = context.el.parent.getNextComponent();
+
+      if (!nextRow) {
+
+        return false;
+      }
+      var sameCell = nextRow.getChild(context.el.getIndex());
+
+      if (!(sameCell && sameCell.isVisible())) {
+
+        return false;
+      }
+      sameCell.moveCursorTo(context.selection.focusOffset);
+
       return false;
     }
     return true;

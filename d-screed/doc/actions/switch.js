@@ -8,6 +8,7 @@ module.exports = function (event) {
 
       context.el.shift(1);
       setTimeout(function () {context.el.moveCursorTo(context.selection.focusOffset);}, 0);
+      return false;
     }
   }
   return true;

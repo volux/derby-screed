@@ -6,16 +6,15 @@ module.exports = function (event) {
 
     if (!context.selection.isCollapsed) {
 
-      var editables = this.getEditablesInContext(context);
-      if (editables.length === 1) {
+      if (context.selected.length === 1) {
 
         return context.el.isContentInput();
       }
-      this.removeSelectedEditables(editables, true, function (lastEl) {
+      this.removeSelectedEditables(context.selected, true, function (lastEl) {
 
         if (!lastEl.glueWithPrevious()) {
 
-          editables[0].el.moveCursorTo(editables[0]['start']);
+          this.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
         }
       });
 

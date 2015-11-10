@@ -11,16 +11,15 @@ module.exports = function (event) {
       return false;
     }
 
-    var editables = this.getEditablesInContext(context);
-    this.removeSelectedEditables(editables, true, function (lastEl) {
+    this.removeSelectedEditables(context.selected, true, function (lastEl) {
 
-      if (1 === editables.length) {
+      if (1 === context.selected.length) {
 
-        context.el.newLineAfterCaret(editables[0]['start']);
+        context.el.newLineAfterCaret(context.selected[0].start);
 
       } else {
 
-        lastEl.moveCursorTo(editables[0]['start']);
+        lastEl.moveCursorTo(context.selected[0].start);
       }
     });
 
@@ -48,11 +47,7 @@ module.exports = function (event) {
 
         context.el.remove();
       }
-      // TODO section.getFirstEditable()
-      section.after(sectionDataCopy)
-        .getFirstChild()
-          .getFirstChild()
-            .focus();
+      section.after(sectionDataCopy).getFirstEditable().focus();
     }
   }
   return false;

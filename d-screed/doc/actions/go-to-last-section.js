@@ -4,14 +4,11 @@ module.exports = function (event) {
 
   if (context && context.el) {
 
-    var section = this.getLastChild();
+    var section = context.el.getSection().parent.getLastChild();
 
     if (section) {
 
-      // TODO section.getFirstEditable()
-      section.getFirstChild()
-        .getFirstChild()
-          .focus();
+      section.getFirstEditable().focus();
       return false;
     }
   }

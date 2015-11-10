@@ -6,25 +6,30 @@ module.exports = function (event) {
 
     var elIndex = context.el.getIndex();
 
-    if (context.el.parent.isContentType('form')) {
+    if (context.el.parent.isContentType(['form', 'table'])) {
 
       var section = context.el.getSection();
-
-      if (!section.parent.isContentType('heap')) {
-
-        return false;
-      }
-
       var sectionIndex = section.getIndex();
 
       if (sectionIndex > 0) {
 
         context.el.blur();
 
-        section.move(sectionIndex - 1)
-          .getChild(context.el.parent.getIndex())
-            .getChild(elIndex)
-              .moveCursorTo(context.selection.focusOffset);
+        var parentId = context.el.parent.id;
+        var parentIndex = context.el.parent.getIndex();
+        var sectionId = section.id;
+        var newParent;
+        var movedSection = section.move(sectionIndex - 1);
+
+        if (parentId !== sectionId) {
+
+          newParent = movedSection.getChild(parentIndex);
+
+        } else {
+
+          newParent = movedSection;
+        }
+        newParent.getChild(elIndex).moveCursorTo(context.selection.focusOffset);
       }
       return false;
     }
@@ -32,8 +37,7 @@ module.exports = function (event) {
 
       if (elIndex > 0) {
 
-        context.el.move(elIndex - 1)
-          .moveCursorTo(context.selection.focusOffset);
+        context.el.move(elIndex - 1).moveCursorTo(context.selection.focusOffset);
       }
     }
   }

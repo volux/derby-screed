@@ -8,11 +8,7 @@ module.exports = function (event) {
 
     if (section.getIndex() > 0) {
 
-      // TODO section.getFirstEditable()
-      section.getPrevComponent()
-        .getFirstChild()
-          .getFirstChild()
-            .focus();
+      section.getPrevComponent().getFirstEditable().focus();
 
       return false;
     }
