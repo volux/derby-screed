@@ -149,7 +149,7 @@ module.exports = {
     'action': require('./actions/go-to-next-section')
   },
 
-  // 'alt+home': // go to first section // fn+alt+home
+  // 'alt+home': // go to first section // fn+alt+left
   'alt+home': {
     'action': require('./actions/go-to-first-section')
   },

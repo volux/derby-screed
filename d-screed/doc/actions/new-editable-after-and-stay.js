@@ -4,14 +4,11 @@ module.exports = function (event) {
 
   if (context && context.el) {
 
-    var editables = [];
-
     if (!context.selection.isCollapsed) {
 
-      editables = this.getEditablesInContext(context);
-      var firstEl = this.removeSelectedEditables(editables, false);
+      var firstEl = this.removeSelectedEditables(context.selected, false);
 
-      if (editables.length > 1) {
+      if (context.selected.length > 1) {
 
         firstEl.moveCursorTo('end');
         return false;
@@ -26,7 +23,7 @@ module.exports = function (event) {
       return false;
     }
 
-    var cursorPosition = (editables.length) ? editables[0]['start'] : context.selection.focusOffset;
+    var cursorPosition = (context.selected.length) ? context.selected[0]['start'] : context.selection.focusOffset;
 
     if (context.el.parent.isContentType('form')) {
 

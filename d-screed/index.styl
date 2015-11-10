@@ -23,7 +23,7 @@
       font-family sans-serif
       font-size 8pt
       background-color $screed-info-bg-color
-      border 1px solid $screed-bg-color
+      border 1px solid $screed-border-color
       &.hidden
         display none
 
@@ -38,7 +38,7 @@
       font-family sans-serif
       font-size 8pt
       background-color $screed-info-bg-color
-      border 1px solid $screed-bg-color
+      border 1px solid $screed-border-color
       &.hidden
         display none
 
@@ -56,12 +56,64 @@
 
     p
     span
+    td
       white-space pre-wrap
+
+    table
+      border-collapse collapse
+      table-layout fixed
+
+      th
+        user-select none
+        white-space nowrap
+        cursor default
+        background-color $screed-panel-bg-color
+        padding .1em .25em
+      .table-corner
+        min-width 2em
+      .table-column-title
+        text-align center
+        min-width 1in
+        font-size 75%
+      .table-row-title
+        min-width 2em
+        text-align right
+        font-size 75%
+      tbody
+        background-color $screed-doc-bg-color
+      td
+        padding .25em
+        cursor text
+        border 1px solid $screed-border-color
+        background-color $screed-doc-bg-color
+
+      thead
+        tr
+          background-color $screed-doc-bg-color
+      tfoot
+        tr
+          background-color $screed-doc-bg-color
+          position absolute
+          top 0
+
+
+    .screed-check
+      display inline-block
+      cursor pointer
+      font-size 150%
+      line-height 1em
+
 
 @media print
 
   .screed-json
   .screed-position
     display none
+
+  .screed
+    table
+      tfoot
+        tr
+          position relative
 
 @import './cursors'

@@ -10,11 +10,7 @@ module.exports = function (event) {
 
       return false;
     }
-    // TODO section.getFirstEditable()
-    section.after(section.getBlankData())
-      .getFirstChild()
-        .getFirstChild()
-          .focus();
+    section.after(section.getBlankData()).getFirstEditable().focus();
   }
   return false;
 };
