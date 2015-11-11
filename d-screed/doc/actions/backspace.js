@@ -17,11 +17,13 @@ module.exports = function (event) {
 
         if (!lastEl.glueWithPrevious()) {
 
-          self.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
+          var firstEl = self.parent.getComponentByPath(context.selected[0].path);
 
-        } else {
+          if (firstEl.getDataText() === '') {
 
-          lastEl.focus();
+            firstEl.blur().setNodeContent(firstEl.getPlaceholder());
+          }
+          firstEl.moveCursorTo(context.selected[0].start);
         }
       });
 

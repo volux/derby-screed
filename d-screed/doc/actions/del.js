@@ -14,6 +14,10 @@ module.exports = function (event) {
 
         if (!firstEl.glueWithNext()) {
 
+          if (firstEl.getDataText() === '') {
+
+            firstEl.blur().setNodeContent(firstEl.getPlaceholder());
+          }
           firstEl.moveCursorTo(context.selected[0].start);
         }
       });
