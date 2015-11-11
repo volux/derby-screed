@@ -15,10 +15,10 @@ module.exports = function (event) {
 
       self.removeSelectedEditables(context.selected, true, function (lastEl) {
 
-        if (!lastEl.glueWithPrevious()) {
+        //if (!lastEl.glueWithPrevious()) {
 
           self.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
-        }
+        //}
       });
 
       return false;
