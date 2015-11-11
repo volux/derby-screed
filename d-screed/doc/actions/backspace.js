@@ -13,11 +13,17 @@ module.exports = function (event) {
 
       var self = this;
 
-      self.removeSelectedEditables(context.selected, true, function (lastEl) {
+      this.removeSelectedEditables(context.selected, true, function (lastEl) {
 
         if (!lastEl.glueWithPrevious()) {
 
-          self.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
+          var firstEl = self.parent.getComponentByPath(context.selected[0].path);
+
+          if (firstEl.getDataText() === '') {
+
+            firstEl.blur().setNodeContent(firstEl.getPlaceholder());
+          }
+          firstEl.moveCursorTo(context.selected[0].start);
         }
       });
 
