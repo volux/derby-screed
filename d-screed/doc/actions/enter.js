@@ -48,7 +48,7 @@ module.exports = function (event) {
 
             var nextText = context.el.cropText(caret, true);
             context.el.parent.after(context.el.parent.getBlankData())
-              .getFirstChild().setDataText(nextText)
+              .getChild(context.el.getIndex()).setDataText(nextText)
               .focus();
 
           } else {
