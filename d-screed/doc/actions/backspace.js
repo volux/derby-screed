@@ -13,12 +13,16 @@ module.exports = function (event) {
 
       var self = this;
 
-      self.removeSelectedEditables(context.selected, true, function (lastEl) {
+      this.removeSelectedEditables(context.selected, true, function (lastEl) {
 
-        //if (!lastEl.glueWithPrevious()) {
+        if (!lastEl.glueWithPrevious()) {
 
           self.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
-        //}
+
+        } else {
+
+          lastEl.focus();
+        }
       });
 
       return false;
