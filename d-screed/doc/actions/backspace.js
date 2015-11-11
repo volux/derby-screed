@@ -10,11 +10,14 @@ module.exports = function (event) {
 
         return context.el.isContentInput();
       }
-      this.removeSelectedEditables(context.selected, true, function (lastEl) {
+
+      var self = this;
+
+      self.removeSelectedEditables(context.selected, true, function (lastEl) {
 
         if (!lastEl.glueWithPrevious()) {
 
-          this.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
+          self.parent.getComponentByPath(context.selected[0].path).moveCursorTo(context.selected[0].start);
         }
       });
 
