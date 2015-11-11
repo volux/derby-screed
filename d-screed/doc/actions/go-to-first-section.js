@@ -9,7 +9,7 @@ module.exports = function (event) {
     // TODO .isVisible() ???
     if (section) {
 
-      section.getFirstEditable().focus()
+      section.getFirstEditable().focus();
       return false;
     }
   }
