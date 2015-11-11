@@ -44,9 +44,19 @@ module.exports = function (event) {
 
         } else {
 
-          context.el.newLineAfterCaret(caret, function () {
-            context.el.nextEditableFocus();
-          })
+          if (context.el.parent.isContentType('table')) {
+
+            var nextText = context.el.cropText(caret, true);
+            context.el.parent.after(context.el.parent.getBlankData())
+              .getFirstChild().setDataText(nextText)
+              .focus();
+
+          } else {
+
+            context.el.newLineAfterCaret(caret, function () {
+              context.el.nextEditableFocus();
+            })
+          }
         }
       }
       return false;
