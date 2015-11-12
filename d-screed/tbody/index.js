@@ -40,6 +40,9 @@ ScreedTBody.prototype.setScroll = function (scroll) {
 ScreedTBody.prototype.getFields = function (data) {
 
   var fields = [];
+
+  if (!data) return fields;
+
   var firstRow =  data[0];
 
   if (firstRow) {
