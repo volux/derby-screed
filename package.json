@@ -1,6 +1,6 @@
 {
   "name": "derby-screed",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "description": "A Derby 0.6 component library for live editing structured data with coworkers",
   "main": "index.js",
   "scripts": {
